@@ -1,98 +1,68 @@
-const {prompt} = require('inquirer');
-require("console.table");
-const db = require("./db/function");
+const {prompt} = require("inquirer")
+require('console.table')
+const db = require('./db')
+const mysql = require('mysql2')
+const { start } = require("repl");
 
-function init() {
-    startQuestions()
+
+function init(){
+    questions()
 }
 
-async function startQuestions() {
-    const { choice } = await prompt([
+async function questions() {
+const {choice} = await prompt([
+    {
+    type: 'list',
+    message: 'What would you like to do?',
+    name: 'choice',
+    choices: [
         {
-            type: 'list',
-            message: 'Welcome what would you like to do?',
-            name: 'choice',
-            choices: [
-                {
-                    type: 'input',
-                    name: 'View all departments',
-                    value: 'VIEW_DEPARTMENTS',
-                },
-                {
-                    type: 'input',
-                    name: 'View all roles',
-                    value: 'VIEW_ROLES',
-                },
-                {
-                    type: 'input',
-                    name: 'View all managers',
-                    value: 'VIEW_MANAGERS',
-                },
-                {
-                    type: 'input',
-                    name: 'add a department',
-                    value: 'linkedIn',
-                },
-                {
-                    type: 'input',
-                    name: 'add a roles',
-                    value: 'linkedIn',
-                },
-                {
-                    type: 'input',
-                    name: 'add a employee',
-                    value: 'linkedIn',
-                },
-                {
-                    type: 'input',
-                    name: 'update an employee',
-                    value: 'linkedIn',
-                },
-                {
-                    name: 'Exit Program',
-                    value: 'QUIT_IT',
-                },
+            type: 'input',
+            name: 'View all departments',
+            value: 'VIEW_DEPARTMENTS'
+        },
+        {
+            type: 'input',
+            name: 'View all roles',
+            value: 'VIEW_ROLES'
+        },
+        {
+            type: 'input',
+            name: 'View all employees',
+            value: 'VIEW_EMPLOYEES'
+        },
+        {
+            type: 'input',
+            name: 'View all departments',
+            value: 'username'
+        }
             ]
-        }])
-    switch (choice) {
+    }])
+    switch (choice){
         case 'VIEW_DEPARTMENTS':
             return viewDepartments();
-            break;
         case 'VIEW_ROLES':
             return viewRoles();
-            break;
-        case 'VIEW_':
-            return viewDepartments();
-            break;
-        case 'VIEW_ROLES':
-            return viewRoles();
-            break;
-        default:
-            return quitIt();
-
-    }
-};
-
-async function viewDepartments() {
-    const department = await db.viewAllDepartments();
-    console.table(department);
-    startQuestions();
+        case 'VIEW_EMPLOYEES':
+            return viewEmployees();          
+}
 }
 
-async function viewRoles() {
-    const roles = await db.viewAllroless();
+async function viewDepartments(){
+    const departments = await db.viewAllDepartments();
+    console.table(departments);
+    questions();
+}
+
+async function viewRoles(){
+    const roles = await db.viewAllRoles();
     console.table(roles);
-    startQuestions();
+    questions();
 }
-
-async function viewManager() {
-    const manager = await db.viewAllManager();
-    console.table(Manager);
-    startQuestions();
-}
-
-function quitIt() {
-    process.exit;
+async function viewEmployees(){
+    const employees = await db.viewAllEmployees();
+    console.table(employees);
+    questions();
 }
 
 init();
