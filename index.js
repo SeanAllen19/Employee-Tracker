@@ -7,7 +7,6 @@ const connection = mysql.createConnection(
     {
         host: 'localhost',
         user: 'root',
-        // MySQL password
         password: '123password',
         database: 'employees_db',
 
@@ -153,7 +152,7 @@ function addDepartment() {
     })
 }
 
-// DEPARTMENT ARRAY SET UP FOR ROLE ADDITION __________________
+
 var deptArr = [];
 function selectDepartment() {
     connection.query("SELECT * FROM department", function (err, res) {
@@ -165,7 +164,7 @@ function selectDepartment() {
     return deptArr;
 }
 
-// ADD ROLE __________________________________
+
 function addRole() {
     connection.query("SELECT role.title AS Title, role.salary AS Salary FROM role LEFT JOIN department.name AS Department FROM department;", function (err, res) {
         inquirer.prompt([
@@ -251,18 +250,6 @@ const addEmployees = () => {
 	});
 };
 
-// // UPDATE EMPLOYEE ROLE _______________________
-// // ROLE ARRAY SET UP FOR EMPLOYEE ADDITION _____________________
-// let roleArr = [];                                            
-// function selectRole() {
-//   connection.query("SELECT * FROM role", function(err, res) {
-//     if (err) throw err
-//     for (var i = 0; i < res.length; i++) {
-//       roleArr.push(res[i].title);
-//     }
-//   })
-//   return roleArr;
-// }
 
 const updateEmployees = () => {
 	const sqlQuery = 'SELECT id, first_name, last_name, role_id FROM employee';
