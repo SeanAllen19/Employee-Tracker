@@ -15,6 +15,8 @@
   ## Description
 
    Create a interfaces that allow non-developers to easily view and interact with information stored in databases. 
+   
+  
 
   ---
 
@@ -26,6 +28,9 @@
 
   ## Usage
 
+  > AS A business owner
+    I WANT to be able to view and manage the departments, roles, and employees in my company
+    SO THAT I can organize and plan my business
   
 
   ---
@@ -38,7 +43,7 @@
 
   ## Contributing
 
-  Refer to Contact Info section
+  Refer to Questions section
 
   ---
 
